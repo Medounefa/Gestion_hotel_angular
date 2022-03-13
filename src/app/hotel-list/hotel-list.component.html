@@ -1,0 +1,47 @@
+
+
+<div class="container">
+    <h2 *ngIf="hotels && hotels.length > 0">{{ title }}</h2>
+    <!-- Button afficher -->
+      <button class="btn btn-primary d-flex" (click)="toggleIsNewButton()">
+        <span class="material-icons ">
+         {{ showBadge ? 'visibility_off': 'visibility'}}
+        </span>
+       <span class="ms-2">
+        {{ showBadge ? 'cacher' : 'afficher'}} Nouveau
+       </span>
+      </button>
+     <!-- F Button afficher -->
+   <hr />
+     <!-- Filter formulaire -->
+      <div class="my-2">
+          <div class="row">
+              <div class="col-md-4">
+                  <span>Filtre actuel: </span>
+                  <b>{{ hotelFilter }}</b>
+              </div>
+              <div class="col-md-8 form-group">
+                  <input type="text" class="form-control" [(ngModel)]="hotelFilter"/>
+                  <!-- <input type="text" class="form-control" [ngModel]="hotelFilter" (ngModelChange)="hotelFilter = $event "/> -->
+              </div>
+          </div>
+      </div>
+     <!-- Fin Filter formulaire -->
+
+    <!-- Liste d'hotel -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-1">
+        <div class="col" *ngFor="let hotel of hotels">
+          <div class="card h-100">
+            <img [src]="hotel.imageUrl" [title]="hotel.hotelName" class="card-img-top" [alt]="hotel.hotelName">
+            <!-- <img src="{{ hotel.imageUrl}}" class="card-img-top" alt="..."> -->
+            <div class="card-body">
+              <h5 class="card-title">{{ hotel.hotelName }}</h5>
+              <p class="card-text"> {{ hotel.description}}</p>
+
+              <span class="btn btn-pill btn-primary rounded-pill btn-sm" *ngIf="showBadge">Nouveau</span>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</div>
